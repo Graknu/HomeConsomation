@@ -1,6 +1,10 @@
 package fr.barroux.homeconsomation.menu;
 
+import java.sql.SQLException;
+
 public interface MenuAction {
 
-    void task();
+    boolean test() throws SQLException;
+
+    void task() throws SQLException;
 }

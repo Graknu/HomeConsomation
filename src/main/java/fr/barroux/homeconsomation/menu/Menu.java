@@ -1,5 +1,8 @@
 package fr.barroux.homeconsomation.menu;
 
+import fr.barroux.homeconsomation.utils.ConsoleUtils;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,8 +34,7 @@ public class Menu {
         actions.put(code, action);
     }
 
-    public void getEntries()
-    {
+    public int getEntries() throws SQLException {
         isactive = true;
         String choice = "";
         MenuAction actionChoice;
@@ -62,21 +64,25 @@ public class Menu {
                 System.out.println(s);
             }
 
-            System.out.println("Saisir le code menu : ");
+            System.out.print("Saisir le code menu : ");
             choice = ScInput.next();
+            System.out.print("\n");
 
             if (options.containsKey(choice))
             {
                 actionChoice = actions.get(choice);
-                actionChoice.task();
+                if (actionChoice.test() != false)
+                {
+                    actionChoice.task();
+                }
             } else
             {
-                System.out.println("Code inconnu.");
+                System.out.println(ConsoleUtils.textWarning("Code inconnu."));
             }
 
         }
 
-
+        return 0;
     }
 
     public void quitMenu()

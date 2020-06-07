@@ -12,12 +12,10 @@ public class ConfigurationReader {
 
     private String filePath;
     private Properties properties;
-    private List<String> illimtyExcluded;
 
     public ConfigurationReader(String fileConfig)
     {
         this.filePath = fileConfig;
-        this.illimtyExcluded = new ArrayList<>();
 
         properties = new Properties();
 
@@ -26,15 +24,6 @@ public class ConfigurationReader {
         try {
             is = new FileInputStream(fileConfig);
             properties.load(is);
-
-            String[] excluded = read("illimityexcluded").split(",");
-
-            if (excluded.length != 0) {
-                for (int i = 0; i < excluded.length; i++) {
-                    illimtyExcluded.add(excluded[i]);
-                }
-            }
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -46,18 +35,6 @@ public class ConfigurationReader {
     public String read(String key)
     {
         return properties.getProperty(key);
-    }
-
-    public boolean isExcluded(String codeAccount)
-    {
-        if (illimtyExcluded.contains(codeAccount))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public boolean keyIsPresent(String key)
