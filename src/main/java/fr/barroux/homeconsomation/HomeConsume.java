@@ -30,17 +30,7 @@ public class HomeConsume {
         menu.addEntries("sf", "Supprimer un fournisseur", new DeleteFournisseur());
         menu.addEntries("lf", "Lister les fournisseurs", new ListFournisseur());
 
-        menu.addEntries("c", "Créer une facture", new MenuAction() {
-            @Override
-            public boolean test() {
-                return true;
-            }
-
-            @Override
-            public void task() {
-                System.out.println("Création facture");
-            }
-        });
+        menu.addEntries("c", "Créer une facture", new CreateFacture());
         menu.addEntries("s", "Supprimer une facture", new MenuAction() {
             @Override
             public boolean test() {
